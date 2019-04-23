@@ -1,0 +1,17 @@
+Pixiv:
+os
+requests
+zipfile
+imageio
+shutil
+stat
+websock
+websocks
+
+Pixiv_Main:
+Pixiv
+time
+
+Bot:
+discord.py
+Pysocks
