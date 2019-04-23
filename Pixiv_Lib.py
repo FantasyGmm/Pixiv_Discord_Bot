@@ -58,7 +58,7 @@ def download_img(img_id: str, img_url: str, p_count: int, img_type: str):
             with open('temp/' + str(img_id) + '.zip', 'wb')as pic:
                 pic.write(r.content)
             Gif_unZip(imgid=img_id)
-            Gif_create(imgid=img_id)
+            return Gif_create(img_id)
         else:
             with open('temp/' + str(img_id) + '_p' + str(p_count) + '.html', 'wb')as code:
                 code.write(r.content)
@@ -157,6 +157,6 @@ def Gif_create(imgid):
     image_list = os.listdir(target)
     for image_name in image_list:
         frames.append(imageio.imread(os.path.join(target, image_name)))
-        time = datetime.datetime.now()
+    time = datetime.datetime.now()
     imageio.mimsave(os.path.join('temp', imgid + '.gif'), frames, 'GIF', duration=0.1)
     return datetime.datetime.now() - time

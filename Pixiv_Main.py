@@ -11,7 +11,7 @@ def search(img_id):
     if imgurl[1] == 'ugoira':
         time = Pixiv_Lib.download_img(img_id=img_id, img_url=imgurl[0], p_count=0, img_type='ugoira')
         imginfo = Pixiv_Lib.PixivV1_img_name(type='illust', id=img_id)
-        imginfo.append(time)
+        imginfo.insert(5,str(time))
         return imginfo
     else:
         if imgurl[len(imgurl) - 1] == 'illustration':
