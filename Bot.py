@@ -25,8 +25,8 @@ async def s_img(ctx, img_id):
         await ctx.send(embed=embed)
     else:
         if img_info[4] == 'ugoira':
-            await ctx.send('GIF', file=discord.File('temp/' + str(img_id) + '.gif'))
             await ctx.send('合成GIF时间:	' + img_info[5])
+            await ctx.send('GIF', file=discord.File('temp/' + str(img_id) + '.gif'))
             await ctx.send(embed=embed)
         else:
             p_count = 0
