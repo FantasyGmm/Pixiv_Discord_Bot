@@ -7,7 +7,7 @@ import stat
 import datetime
 
 
-def download_imgs(img_id: str, img_url: str, p_count: int):
+def download_Gif(img_id: str, img_url: str, p_count: int):
     proxies = {
         'http': 'socks5://127.0.0.1:1080',
         'https': 'socks5://127.0.0.1:1080'
@@ -58,14 +58,14 @@ def download_img(img_id: str, img_url: str, p_count: int, img_type: str):
             with open('temp/' + str(img_id) + '.zip', 'wb')as pic:
                 pic.write(r.content)
             Gif_unZip(imgid=img_id)
-            return Gif_create(img_id)
+            return Gif_Mix(img_id)
         else:
             with open('temp/' + str(img_id) + '_p' + str(p_count) + '.html', 'wb')as code:
                 code.write(r.content)
     session.close()
 
 
-def clea_imgcache():
+def clean_imgcache():
     if os.path.exists('temp'):
         for fileList in os.walk('temp'):
             for name in fileList[2]:
@@ -110,7 +110,7 @@ def PixivV1_img_url(id: str):
         return imgurl
 
 
-def PixivV1_img_name(type: str, id: str):
+def PixivV1_img_info(type: str, id: str):
     imginfo = []
     apiurl = 'https://api.imjad.cn/pixiv/v1/?type' + type
     if type == 'illustration':
@@ -151,7 +151,7 @@ def Gif_unZip(imgid):
         f.extract(file, target)
 
 
-def Gif_create(imgid):
+def Gif_Mix(imgid):
     target = os.path.join('temp', imgid)
     frames = []
     image_list = os.listdir(target)
