@@ -1,27 +1,44 @@
 import Pixiv_Lib
 
 
-def search(img_id):
+def search(img_id, size_type: str):
+    if size_type is None:
+        size_type = 'large'
     i = 0
-    imgurl = Pixiv_Lib.PixivV1_img_url(id=img_id)
-    if imgurl[1] == 'illust':
-        Pixiv_Lib.download_img(img_id=img_id, img_url=imgurl[0], p_count=i, img_type=imgurl[1])
-        imginfo = Pixiv_Lib.PixivV1_img_info(type=imgurl[1], id=img_id)
-        return imginfo
-    if imgurl[1] == 'ugoira':
-        time = Pixiv_Lib.download_img(img_id=img_id, img_url=imgurl[0], p_count=0, img_type='ugoira')
-        imginfo = Pixiv_Lib.PixivV1_img_info(type='illust', id=img_id)
-        imginfo.insert(5,str(time))
-        return imginfo
+    img_url = Pixiv_Lib.pixiv_v1_img_url(img_id=img_id, size=size_type)
+    if img_url[1] == 'illust':
+        Pixiv_Lib.download_img(img_id=img_id, img_url=img_url[0], p_count=i, img_type=img_url[1])
+        img_info = Pixiv_Lib.pixiv_v1_img_info(img_type=img_url[1], img_id=img_id)
+        return img_info
+    if img_url[1] == 'ugoira':
+        time = Pixiv_Lib.download_img(img_id=img_id, img_url=img_url[0], p_count=0, img_type='ugoira')
+        img_info = Pixiv_Lib.pixiv_v1_img_info(img_type='illust', img_id=img_id)
+        img_info.insert(5, str(time))
+        return img_info
     else:
-        if imgurl[len(imgurl) - 1] == 'illustration':
-            while i < (len(imgurl) - 1):
-                print('download', i)
-                Pixiv_Lib.download_Gif(img_id, imgurl[i], i)
+        if img_url[len(img_url) - 1] == 'illustration':
+            while i < (len(img_url) - 1):
+                # print('download', i)
+                Pixiv_Lib.download_illusts(img_id, img_url[i], i)
                 i += 1
-            imginfo = Pixiv_Lib.PixivV1_img_info(type=imgurl[int(len(imgurl) - 1)], id=img_id)
-            return imginfo
+            img_info = Pixiv_Lib.pixiv_v1_img_info(img_type=img_url[int(len(img_url) - 1)], img_id=img_id)
+            return img_info
 
 
 def clean():
-    Pixiv_Lib.clean_imgcache()
+    Pixiv_Lib.clean_img_cache()
+
+
+def user_info(user_id: str):
+    return Pixiv_Lib.pixiv_v1_user_info(user_id)
+
+
+def user_img(user_id: str):
+    user_img_info = Pixiv_Lib.pixiv_v1_user_img(user_id)
+    img_info = []
+    img_info.insert(0, user_img_info[0])
+    i = 1
+    while i < user_img_info[0]:
+        img_info.insert(i, search(img_id=user_img_info[i], size_type='medium'))
+        i += 1
+    return img_info

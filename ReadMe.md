@@ -7,6 +7,10 @@ kick 踢人<p>
 s_img 根据P站ID搜索图片<p>
   命令使用方法:$s_img PixivId<p>
 注:可以搜索GIF图，多图，因为p站防盗链设计所以所有图片均需要缓存到本地再上传，部分图片无法上传是因为discord的原因，附件最大为8MB，超过大小的均无法上传<p>
+s_user 搜索作者<p>
+    命令使用方法:$s_user UserId<p>
+s_userimg 搜索作者作品并发出<p>
+    命令使用方法:$s_userimg UserId<p>
 cleanimg 清理本地img缓存<p>
   命令使用方法:$cleanimg<p>
 注:缓存目录位bot.py同级目录下的temp文件夹，如果没有会自动创建，使用clean会删除temp文件夹里的所有文件包括temp文件夹<p>
