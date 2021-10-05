@@ -13,5 +13,5 @@ PySocks==1.6.8
 requests==2.21.0
 urllib3==1.24.2
 websock==1.0.1
-websockets==7.0
+websockets==9.1
 yarl==1.3.0
